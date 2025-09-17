@@ -1,0 +1,17 @@
+import { Inject, Injectable } from "@nestjs/common";
+import { NodeEntity } from "../models/entities/node.entity";
+import { NodeType } from "../models/enums/node-type.enum";
+import { INodeRepository } from "../models/interfaces/node.repository.interface";
+
+@Injectable()
+export class CreateNodeUseCase {
+	constructor(
+		@Inject("INodeRepository")
+		private readonly nodeRepository: INodeRepository
+	) {}
+
+	async execute(type: NodeType, name: string, email?: string): Promise<NodeEntity> {
+		const node = new NodeEntity({ name, email, type });
+		return this.nodeRepository.create(node);
+	}
+}
