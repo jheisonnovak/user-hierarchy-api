@@ -1,13 +1,17 @@
 services:
     api:
-        image: node:22
+        build:
+            context: .
+            dockerfile: Dockerfile
         working_dir: /var/api
         volumes:
             - ..:/var/api:cached
+            - node_modules:/var/api/node_modules
         # command: ["sh", "-c", "npm run start:dev"]
         command: sleep infinity
         ports:
             - "3000:3000"
+            - "9229:9229" # Debug port
         environment:
             NODE_ENV: development
             DB_HOST: postgres
@@ -21,16 +25,22 @@ services:
         tty: true
 
     postgres:
-        image: postgres:latest
-        restart: always
+        image: postgres:16-alpine
+        restart: unless-stopped
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: user_hierarchy
         volumes:
-            - db_data:/var/lib/postgresql/data
+            - postgres_data:/var/lib/postgresql/data
         ports:
             - "5452:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
 volumes:
-    db_data:
+    postgres_data:
+    node_modules:

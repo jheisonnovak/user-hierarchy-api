@@ -13,6 +13,6 @@
 			"terminal.integrated.shell.linux": "/bin/bash"
 		}
 	},
-	"postCreateCommand": "npm install",
-	"remoteUser": "node"
+	"postCreateCommand": "yarn install",
+	"remoteUser": "root"
 }
