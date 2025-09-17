@@ -3,7 +3,6 @@ export class ListUserDto {
 		private readonly id: string,
 		private readonly name: string,
 		private readonly email: string | undefined,
-		private readonly createdAt: Date,
-		private readonly updatedAt: Date
+		private readonly createdAt: Date
 	) {}
 }

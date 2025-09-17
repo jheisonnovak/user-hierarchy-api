@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryColumn } from "typeorm";
+import { Column, Entity, Index, PrimaryColumn } from "typeorm";
 
 @Entity("closure")
 @Index(["ancestorId", "descendantId"], { unique: true })
@@ -11,9 +11,6 @@ export class ClosureEntity {
 
 	@Column({ type: "int", default: 0 })
 	depth: number;
-
-	@CreateDateColumn({ name: "created_at" })
-	createdAt: Date;
 
 	constructor(partial: Partial<ClosureEntity>) {
 		Object.assign(this, partial);

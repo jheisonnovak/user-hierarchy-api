@@ -2,9 +2,11 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ClosureEntity } from "./models/entities/closure.entity";
 import { NodeEntity } from "./models/entities/node.entity";
+import { ClosureTypeOrmRepository } from "./repositories/closure.repository";
 import { NodeTypeOrmRepository } from "./repositories/node.repository";
-import { NodeService } from "./services/node.service";
+import { CreateClosureSelfLinkUseCase } from "./use-cases/create-closure-self-link.use-case";
 import { CreateNodeUseCase } from "./use-cases/create-node.use-case";
+import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqueness.use-case";
 
 @Module({
 	imports: [TypeOrmModule.forFeature([NodeEntity, ClosureEntity])],
@@ -14,9 +16,15 @@ import { CreateNodeUseCase } from "./use-cases/create-node.use-case";
 			provide: "INodeRepository",
 			useExisting: NodeTypeOrmRepository,
 		},
+		ClosureTypeOrmRepository,
+		{
+			provide: "IClosureRepository",
+			useExisting: ClosureTypeOrmRepository,
+		},
 		CreateNodeUseCase,
-		NodeService,
+		CreateClosureSelfLinkUseCase,
+		ValidateEmailUniquenessUseCase,
 	],
-	exports: [TypeOrmModule, CreateNodeUseCase, NodeService],
+	exports: [TypeOrmModule, CreateNodeUseCase, CreateClosureSelfLinkUseCase, ValidateEmailUniquenessUseCase],
 })
 export class HierarchyModule {}

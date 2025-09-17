@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 import { NodeType } from "../enums/node-type.enum";
 
 @Entity("nodes")
@@ -18,9 +18,6 @@ export class NodeEntity {
 
 	@CreateDateColumn({ name: "created_at" })
 	createdAt: Date;
-
-	@UpdateDateColumn({ name: "updated_at" })
-	updatedAt: Date;
 
 	constructor(partial?: Partial<NodeEntity>) {
 		Object.assign(this, partial);

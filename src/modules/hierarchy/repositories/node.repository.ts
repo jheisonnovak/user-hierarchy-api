@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { EntityManager, Repository } from "typeorm";
 import { NodeEntity } from "../models/entities/node.entity";
 import { INodeRepository } from "../models/interfaces/node.repository.interface";
 
@@ -11,8 +11,9 @@ export class NodeTypeOrmRepository implements INodeRepository {
 		private readonly repository: Repository<NodeEntity>
 	) {}
 
-	async create(nodeData: Partial<NodeEntity>): Promise<NodeEntity> {
-		return await this.repository.save(nodeData);
+	async create(nodeData: Partial<NodeEntity>, entityManager?: EntityManager): Promise<NodeEntity> {
+		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
+		return await repo.save(nodeData);
 	}
 
 	async existsByEmail(email: string): Promise<boolean> {
