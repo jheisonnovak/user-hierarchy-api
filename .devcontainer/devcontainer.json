@@ -1,0 +1,18 @@
+{
+	"name": "user-hierarchy-api",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "api",
+	"workspaceFolder": "/var/api",
+	"shutdownAction": "stopCompose",
+	"forwardPorts": [3000, 5432],
+	"customizations": {
+		"vscode": {
+			"extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "visualstudioexptteam.vscodeintellicode"]
+		},
+		"settings": {
+			"terminal.integrated.shell.linux": "/bin/bash"
+		}
+	},
+	"postCreateCommand": "npm install",
+	"remoteUser": "node"
+}
