@@ -5,7 +5,7 @@ import { IsObjectiveString } from "../../../../common/decorators/is-objetive-str
 export class CreateGroupDto {
 	@Transform(({ value }) => (typeof value === "string" ? value.trim() : value))
 	@IsNotEmpty()
-	@IsObjectiveString({ minLength: 2, maxLength: 255 })
+	@IsObjectiveString({ minLength: 1, maxLength: 255 })
 	name: string;
 
 	@IsOptional()

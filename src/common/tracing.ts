@@ -4,16 +4,15 @@ import { CompositePropagator, W3CBaggagePropagator, W3CTraceContextPropagator } 
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { B3Propagator } from "@opentelemetry/propagator-b3";
 import { JaegerPropagator } from "@opentelemetry/propagator-jaeger";
-import { ConsoleMetricExporter, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
 import * as process from "process";
 
 const sdk = new NodeSDK({
 	serviceName: "user-hierarchy-api",
-	metricReader: new PeriodicExportingMetricReader({
-		exporter: new ConsoleMetricExporter(),
-	}),
+	// metricReader: new PeriodicExportingMetricReader({
+	// 	exporter: new ConsoleMetricExporter(),
+	// }),
 	spanProcessor: new BatchSpanProcessor(new OTLPTraceExporter({ url: process.env.JAEGER_ENDPOINT })),
 	contextManager: new AsyncLocalStorageContextManager(),
 	textMapPropagator: new CompositePropagator({

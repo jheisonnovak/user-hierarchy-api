@@ -33,7 +33,7 @@ export class TracingInterceptor implements NestInterceptor {
 						next: data => {
 							span.setAttributes({
 								"http.status_code": response.statusCode,
-								"response.data_length": JSON.stringify(data).length,
+								"response.data_length": JSON.stringify(data)?.length || 0,
 							});
 							span.setStatus({ code: SpanStatusCode.OK });
 						},

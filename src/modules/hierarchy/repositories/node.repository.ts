@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager, Repository } from "typeorm";
 import { NodeEntity } from "../models/entities/node.entity";
 import { NodeType } from "../models/enums/node-type.enum";
+import { HierarchyNode } from "../models/interfaces/hierarchy.interface";
 import { INodeRepository } from "../models/interfaces/node.repository.interface";
 
 @Injectable()
@@ -29,5 +30,26 @@ export class NodeTypeOrmRepository implements INodeRepository {
 	async findByIdAndType(id: string, type: NodeType, entityManager?: EntityManager): Promise<NodeEntity | null> {
 		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
 		return repo.findOne({ where: { id, type } });
+	}
+
+	async findAncestorsById(id: string, entityManager?: EntityManager): Promise<HierarchyNode[]> {
+		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
+		return await repo
+			.createQueryBuilder("node")
+			.select(["node.id AS id", "node.name AS name", "closure.depth AS depth"])
+			.innerJoin("closure", "closure", "closure.descendant_id = :id AND closure.ancestor_id = node.id AND closure.depth > 0", { id })
+			.orderBy("closure.depth", "ASC")
+			.getRawMany<HierarchyNode>();
+	}
+
+	async findAncestorsByIdAndType(id: string, type: NodeType, entityManager?: EntityManager): Promise<HierarchyNode[]> {
+		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
+		return await repo
+			.createQueryBuilder("node")
+			.select(["node.id AS id", "node.name AS name", "closure.depth AS depth"])
+			.innerJoin("closure", "closure", "closure.descendant_id = :id AND closure.ancestor_id = node.id AND closure.depth > 0", { id })
+			.where("node.type = :type", { type })
+			.orderBy("closure.depth", "ASC")
+			.getRawMany<HierarchyNode>();
 	}
 }

@@ -35,8 +35,14 @@ export class CreateRelationshipUseCase {
 		if (!parent || !child) throw new NotFoundException("The parent or the child was not found");
 		if (parentId === childId) throw new ConflictException("Cyclic relationship is not allowed");
 
-		const existingCycle = await this.closureRepository.findByAncestorAndDescendant(childId, parentId);
+		// TODO optimize this to a single query
+		const [existingCycle, existingRelationship] = await Promise.all([
+			this.closureRepository.findByAncestorAndDescendant(childId, parentId),
+			this.closureRepository.findByAncestorAndDescendant(parentId, childId),
+		]);
 		if (existingCycle) throw new ConflictException("Cyclic relationship is not allowed");
+		if (existingRelationship) throw new ConflictException("Relationship already exists");
+
 		return { parent, child };
 	}
 }

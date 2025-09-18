@@ -31,6 +31,7 @@ import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqu
 	],
 	exports: [
 		TypeOrmModule,
+		"INodeRepository",
 		CreateNodeUseCase,
 		CreateClosureSelfLinkUseCase,
 		ValidateEmailUniquenessUseCase,

@@ -4,7 +4,7 @@
 	"service": "api",
 	"workspaceFolder": "/var/api",
 	"shutdownAction": "stopCompose",
-	"forwardPorts": [3000, 5432],
+	"forwardPorts": [3000, 5432, 16686, 4318],
 	"customizations": {
 		"vscode": {
 			"extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "visualstudioexptteam.vscodeintellicode"]
