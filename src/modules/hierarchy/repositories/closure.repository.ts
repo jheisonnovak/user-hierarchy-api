@@ -20,6 +20,14 @@ export class ClosureTypeOrmRepository implements IClosureRepository {
 		const repository = entityManager ? entityManager.getRepository(ClosureEntity) : this.closureRepository;
 		return repository.findOne({ where: { ancestorId, descendantId } });
 	}
+	async findRelationBetweenNodes(firstNodeId: string, secondNodeId: string, entityManager?: EntityManager): Promise<ClosureEntity | null> {
+		const repository = entityManager ? entityManager.getRepository(ClosureEntity) : this.closureRepository;
+		return repository
+			.createQueryBuilder("closure")
+			.where("closure.ancestor_id = :firstNodeId AND closure.descendant_id = :secondNodeId", { firstNodeId, secondNodeId })
+			.orWhere("closure.ancestor_id = :secondNodeId AND closure.descendant_id = :firstNodeId", { firstNodeId, secondNodeId })
+			.getOne();
+	}
 
 	async findAncestors(descendantId: string, entityManager?: EntityManager): Promise<ClosureEntity[]> {
 		const repository = entityManager ? entityManager.getRepository(ClosureEntity) : this.closureRepository;

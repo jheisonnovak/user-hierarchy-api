@@ -7,7 +7,7 @@
 	"forwardPorts": [3000, 5432, 16686, 4318],
 	"customizations": {
 		"vscode": {
-			"extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "visualstudioexptteam.vscodeintellicode"]
+			"extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "visualstudioexptteam.vscodeintellicode", "gruntfuggly.todo-tree"]
 		},
 		"settings": {
 			"terminal.integrated.shell.linux": "/bin/bash"
