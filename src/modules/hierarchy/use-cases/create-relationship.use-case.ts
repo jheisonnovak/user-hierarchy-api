@@ -2,22 +2,16 @@ import { ConflictException, Inject, Injectable } from "@nestjs/common";
 import { EntityManager } from "typeorm";
 import { NodeEntity } from "../models/entities/node.entity";
 import { IClosureRepository } from "../models/interfaces/closure.repository.interface";
-import { CreateClosureSelfLinkUseCase } from "./create-closure-self-link.use-case";
 
 @Injectable()
 export class CreateRelationshipUseCase {
 	constructor(
 		@Inject("IClosureRepository")
-		private readonly closureRepository: IClosureRepository,
-		private readonly createClosureSelfLinkUseCase: CreateClosureSelfLinkUseCase
+		private readonly closureRepository: IClosureRepository
 	) {}
 
 	async execute(parent: NodeEntity, child: NodeEntity, entityManager?: EntityManager): Promise<void> {
 		await this.findAndValidateParentAndChild(parent, child, entityManager);
-
-		await this.createClosureSelfLinkUseCase.execute(parent.id, entityManager);
-		await this.createClosureSelfLinkUseCase.execute(child.id, entityManager);
-
 		await this.closureRepository.createRelationshipsBatch(parent.id, child.id, entityManager);
 	}
 

@@ -5,7 +5,7 @@ import { NodeType } from "../models/enums/node-type.enum";
 import { INodeRepository } from "../models/interfaces/node.repository.interface";
 
 @Injectable()
-export class CreateNodeUseCase {
+export class CreateNodeWithSelfLinkUseCase {
 	constructor(
 		@Inject("INodeRepository")
 		private readonly nodeRepository: INodeRepository
@@ -13,6 +13,6 @@ export class CreateNodeUseCase {
 
 	async execute(type: NodeType, name: string, email?: string, entityManager?: EntityManager): Promise<NodeEntity> {
 		const node = new NodeEntity({ name, email, type });
-		return this.nodeRepository.create(node, entityManager);
+		return this.nodeRepository.createWithSelfLink(node, entityManager);
 	}
 }

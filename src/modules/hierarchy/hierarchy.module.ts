@@ -5,8 +5,7 @@ import { ClosureEntity } from "./models/entities/closure.entity";
 import { NodeEntity } from "./models/entities/node.entity";
 import { ClosureTypeOrmRepository } from "./repositories/closure.repository";
 import { NodeTypeOrmRepository } from "./repositories/node.repository";
-import { CreateClosureSelfLinkUseCase } from "./use-cases/create-closure-self-link.use-case";
-import { CreateNodeUseCase } from "./use-cases/create-node.use-case";
+import { CreateNodeWithSelfLinkUseCase } from "./use-cases/create-node.use-case";
 import { CreateRelationshipUseCase } from "./use-cases/create-relationship.use-case";
 import { FindAncestorsUseCase } from "./use-cases/find-ancestors.use-case";
 import { FindAndValidateNodeUseCase } from "./use-cases/find-and-validate-node.use-case";
@@ -26,8 +25,7 @@ import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqu
 			provide: "IClosureRepository",
 			useExisting: ClosureTypeOrmRepository,
 		},
-		CreateNodeUseCase,
-		CreateClosureSelfLinkUseCase,
+		CreateNodeWithSelfLinkUseCase,
 		ValidateEmailUniquenessUseCase,
 		CreateRelationshipUseCase,
 		FindAndValidateNodeUseCase,
@@ -38,8 +36,7 @@ import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqu
 	exports: [
 		TypeOrmModule,
 		"INodeRepository",
-		CreateNodeUseCase,
-		CreateClosureSelfLinkUseCase,
+		CreateNodeWithSelfLinkUseCase,
 		ValidateEmailUniquenessUseCase,
 		CreateRelationshipUseCase,
 		FindAndValidateNodeUseCase,

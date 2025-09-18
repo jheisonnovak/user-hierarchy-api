@@ -13,9 +13,23 @@ export class NodeTypeOrmRepository implements INodeRepository {
 		private readonly repository: Repository<NodeEntity>
 	) {}
 
-	async create(nodeData: Partial<NodeEntity>, entityManager?: EntityManager): Promise<NodeEntity> {
+	async createWithSelfLink(nodeData: Partial<NodeEntity>, entityManager?: EntityManager): Promise<NodeEntity> {
 		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
-		return await repo.save(nodeData);
+		const node = await repo.query<NodeEntity[]>(
+			`
+		WITH inserted_node AS (
+            INSERT INTO nodes (name, email, type) 
+            VALUES ($1, $2, $3) 
+            RETURNING *
+        ),
+        inserted_closure AS (
+            INSERT INTO closure (ancestor_id, descendant_id, depth)
+            SELECT id, id, 0 FROM inserted_node
+        )
+        SELECT * FROM inserted_node`,
+			[nodeData.name, nodeData.email, nodeData.type]
+		);
+		return node[0];
 	}
 
 	async existsByEmail(email: string): Promise<boolean> {
