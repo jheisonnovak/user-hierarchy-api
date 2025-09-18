@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager, Repository } from "typeorm";
 import { NodeEntity } from "../models/entities/node.entity";
+import { NodeType } from "../models/enums/node-type.enum";
 import { INodeRepository } from "../models/interfaces/node.repository.interface";
 
 @Injectable()
@@ -23,5 +24,10 @@ export class NodeTypeOrmRepository implements INodeRepository {
 	async findById(id: string, entityManager?: EntityManager): Promise<NodeEntity | null> {
 		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
 		return repo.findOne({ where: { id } });
+	}
+
+	async findByIdAndType(id: string, type: NodeType, entityManager?: EntityManager): Promise<NodeEntity | null> {
+		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
+		return repo.findOne({ where: { id, type } });
 	}
 }
