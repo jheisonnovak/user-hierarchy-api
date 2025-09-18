@@ -10,9 +10,9 @@ export class FindAndValidateNodeUseCase {
 		private readonly nodeRepository: INodeRepository
 	) {}
 
-	async execute(id: string, type: NodeType): Promise<NodeEntity> {
-		const node = await this.nodeRepository.findByIdAndType(id, type);
-		if (!node) throw new NotFoundException(`The ${type} was not found`);
+	async execute(id: string, type?: NodeType): Promise<NodeEntity> {
+		const node = type ? await this.nodeRepository.findByIdAndType(id, type) : await this.nodeRepository.findById(id);
+		if (!node) throw new NotFoundException(`The ${type ?? "node"} was not found`);
 		return node;
 	}
 }

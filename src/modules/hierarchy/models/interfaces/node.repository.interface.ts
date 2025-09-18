@@ -8,6 +8,7 @@ export interface INodeRepository {
 	existsByEmail(email: string): Promise<boolean>;
 	findById(id: string, entityManager?: EntityManager): Promise<NodeEntity | null>;
 	findByIdAndType(id: string, type: NodeType, entityManager?: EntityManager): Promise<NodeEntity | null>;
+	findDescendantsById(id: string, entityManager?: EntityManager): Promise<HierarchyNode[]>;
 	findAncestorsById(id: string, entityManager?: EntityManager): Promise<HierarchyNode[]>;
 	findAncestorsByIdAndType(id: string, type: NodeType, entityManager?: EntityManager): Promise<HierarchyNode[]>;
 }
