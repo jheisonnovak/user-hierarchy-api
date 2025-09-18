@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { Logger } from "nestjs-pino";
-import { NodeType } from "../../hierarchy/models/enums/node-type.enum";
-import { CreateNodeWithSelfLinkUseCase } from "../../hierarchy/use-cases/create-node.use-case";
-import { ValidateEmailUniquenessUseCase } from "../../hierarchy/use-cases/validate-email-uniqueness.use-case";
-import { CreateUserDto } from "../models/dtos/create.dto";
-import { ListUserDto } from "../models/dtos/list.dto";
+import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
+import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node.use-case";
+import { ValidateEmailUniquenessUseCase } from "../../../hierarchy/use-cases/validate-email-uniqueness.use-case";
+import { CreateUserDto } from "../../models/dtos/create.dto";
+import { ListUserDto } from "../../models/dtos/list.dto";
 
 @Injectable()
 export class CreateUserUseCase {

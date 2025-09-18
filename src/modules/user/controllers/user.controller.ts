@@ -3,9 +3,9 @@ import { ListHierarchyDto } from "../../hierarchy/models/dtos/list.dto";
 import { CreateAssociationDto } from "../models/dtos/create-association.dto";
 import { CreateUserDto } from "../models/dtos/create.dto";
 import { ListUserDto } from "../models/dtos/list.dto";
-import { CreateAssociationUserUseCase } from "../use-cases/create-association.use-case";
-import { CreateUserUseCase } from "../use-cases/create.use-case";
-import { FindOrganizationsUseCase } from "../use-cases/find-organizations.use-case";
+import { CreateAssociationUserUseCase } from "../use-cases/create-association/create-association.use-case";
+import { CreateUserUseCase } from "../use-cases/create/create.use-case";
+import { FindOrganizationsUseCase } from "../use-cases/find-organizations/find-organizations.use-case";
 
 @Controller("users")
 export class UserController {

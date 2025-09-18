@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ListHierarchyDto } from "../../hierarchy/models/dtos/list.dto";
-import { NodeType } from "../../hierarchy/models/enums/node-type.enum";
-import { INodeRepository } from "../../hierarchy/models/interfaces/node.repository.interface";
-import { FindAndValidateNodeUseCase } from "../../hierarchy/use-cases/find-and-validate-node.use-case";
+import { ListHierarchyDto } from "../../../hierarchy/models/dtos/list.dto";
+import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
+import { INodeRepository } from "../../../hierarchy/models/interfaces/node.repository.interface";
+import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node.use-case";
 
 @Injectable()
 export class FindOrganizationsUseCase {

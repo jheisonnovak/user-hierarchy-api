@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { DataSource } from "typeorm";
-import { NodeType } from "../../hierarchy/models/enums/node-type.enum";
-import { CreateRelationshipUseCase } from "../../hierarchy/use-cases/create-relationship.use-case";
-import { FindAndValidateNodeUseCase } from "../../hierarchy/use-cases/find-and-validate-node.use-case";
-import { CreateAssociationDto } from "../models/dtos/create-association.dto";
+import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
+import { CreateRelationshipUseCase } from "../../../hierarchy/use-cases/create-relationship.use-case";
+import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node.use-case";
+import { CreateAssociationDto } from "../../models/dtos/create-association.dto";
 
 @Injectable()
 export class CreateAssociationUserUseCase {
