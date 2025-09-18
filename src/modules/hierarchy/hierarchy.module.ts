@@ -6,6 +6,7 @@ import { ClosureTypeOrmRepository } from "./repositories/closure.repository";
 import { NodeTypeOrmRepository } from "./repositories/node.repository";
 import { CreateClosureSelfLinkUseCase } from "./use-cases/create-closure-self-link.use-case";
 import { CreateNodeUseCase } from "./use-cases/create-node.use-case";
+import { CreateRelationshipUseCase } from "./use-cases/create-relationship.use-case";
 import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqueness.use-case";
 
 @Module({
@@ -24,7 +25,8 @@ import { ValidateEmailUniquenessUseCase } from "./use-cases/validate-email-uniqu
 		CreateNodeUseCase,
 		CreateClosureSelfLinkUseCase,
 		ValidateEmailUniquenessUseCase,
+		CreateRelationshipUseCase,
 	],
-	exports: [TypeOrmModule, CreateNodeUseCase, CreateClosureSelfLinkUseCase, ValidateEmailUniquenessUseCase],
+	exports: [TypeOrmModule, CreateNodeUseCase, CreateClosureSelfLinkUseCase, ValidateEmailUniquenessUseCase, CreateRelationshipUseCase],
 })
 export class HierarchyModule {}

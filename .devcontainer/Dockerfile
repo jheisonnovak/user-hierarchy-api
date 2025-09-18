@@ -1,6 +1,5 @@
 FROM node:23-alpine3.20
 
-
 RUN apk update && apk add --no-cache \
     sudo \
     git \

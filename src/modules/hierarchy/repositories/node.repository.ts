@@ -19,4 +19,9 @@ export class NodeTypeOrmRepository implements INodeRepository {
 	async existsByEmail(email: string): Promise<boolean> {
 		return this.repository.exists({ where: { email } });
 	}
+
+	async findById(id: string, entityManager?: EntityManager): Promise<NodeEntity | null> {
+		const repo = entityManager ? entityManager.getRepository(NodeEntity) : this.repository;
+		return repo.findOne({ where: { id } });
+	}
 }
