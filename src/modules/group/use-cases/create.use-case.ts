@@ -23,6 +23,6 @@ export class CreateGroupUseCase {
 			if (dto.parentId) await this.createRelationshipUseCase.execute(dto.parentId, group.id, entityManager);
 			return group;
 		});
-		return new ListGroupDto(group.id, group.name, group.createdAt);
+		return new ListGroupDto(group.id, group.type, group.name, group.createdAt);
 	}
 }

@@ -5,7 +5,7 @@ import { IsObjectiveString } from "../../../../common/decorators/is-objetive-str
 export class CreateUserDto {
 	@Transform(({ value }) => (typeof value === "string" ? value.trim() : value))
 	@IsNotEmpty()
-	@IsObjectiveString({ minLength: 2, maxLength: 255 })
+	@IsObjectiveString({ minLength: 1, maxLength: 255 })
 	name: string;
 
 	@Transform(({ value }) => (typeof value === "string" ? value.trim().toLowerCase() : value))

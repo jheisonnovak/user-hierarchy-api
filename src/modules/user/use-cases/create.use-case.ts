@@ -29,7 +29,7 @@ export class CreateUserUseCase {
 			});
 
 			this.logger.log("User created successfully", { userId: user.id, email: dto.email });
-			return new ListUserDto(user.id, user.name, user.email, user.createdAt);
+			return new ListUserDto(user.id, user.type, user.name, user.email, user.createdAt);
 		} catch (error) {
 			this.logger.error("Failed to create user", error as Error, { email: dto.email });
 			throw error;
