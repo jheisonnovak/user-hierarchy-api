@@ -11,7 +11,6 @@ services:
         command: sleep infinity
         ports:
             - "3000:3000"
-            - "9229:9229" # Debug port
         environment:
             NODE_ENV: development
             DB_HOST: postgres
@@ -19,6 +18,7 @@ services:
             DB_USERNAME: postgres
             DB_PASSWORD: postgres
             DB_DATABASE: user_hierarchy
+            JAEGER_ENDPOINT: http://jaeger:4318/v1/traces
         depends_on:
             - postgres
         stdin_open: true
@@ -40,6 +40,14 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
+
+    jaeger:
+        image: jaegertracing/all-in-one:1.51
+        ports:
+            - "16686:16686"
+            - "4318:4318"
+        environment:
+            COLLECTOR_OTLP_ENABLED: true
 
 volumes:
     postgres_data:
