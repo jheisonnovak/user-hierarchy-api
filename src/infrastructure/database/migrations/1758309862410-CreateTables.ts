@@ -5,7 +5,7 @@ export class CreateTables1758309862410 implements MigrationInterface {
 
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.query(
-			`CREATE TABLE "nodes" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "type" "public"."nodes_type_enum" NOT NULL, "name" character varying(255) NOT NULL, "email" character varying(255), "created_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "UQ_5e74781a18fe7b45124014c38f6" UNIQUE ("email"), CONSTRAINT "PK_682d6427523a0fa43d062ea03ee" PRIMARY KEY ("id"))`
+			`CREATE TABLE "nodes" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "type" character varying NOT NULL, "name" character varying(255) NOT NULL, "email" character varying(255), "created_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "UQ_5e74781a18fe7b45124014c38f6" UNIQUE ("email"), CONSTRAINT "PK_682d6427523a0fa43d062ea03ee" PRIMARY KEY ("id"))`
 		);
 		await queryRunner.query(`CREATE UNIQUE INDEX "IDX_f45a8bf98c0e58c5255b309824" ON "nodes" ("email") WHERE email IS NOT NULL`);
 		await queryRunner.query(

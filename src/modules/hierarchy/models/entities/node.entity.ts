@@ -6,7 +6,7 @@ export class NodeEntity {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column({ type: "enum", enum: NodeType })
+	@Column({ type: "character varying", enum: NodeType })
 	type: NodeType;
 
 	@Column({ length: 255 })
