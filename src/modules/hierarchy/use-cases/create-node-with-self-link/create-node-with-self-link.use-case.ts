@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { EntityManager } from "typeorm";
-import { NodeEntity } from "../models/entities/node.entity";
-import { NodeType } from "../models/enums/node-type.enum";
-import { INodeRepository } from "../models/interfaces/node.repository.interface";
+import { NodeEntity } from "../../models/entities/node.entity";
+import { NodeType } from "../../models/enums/node-type.enum";
+import { INodeRepository } from "../../models/interfaces/node.repository.interface";
 
 @Injectable()
 export class CreateNodeWithSelfLinkUseCase {

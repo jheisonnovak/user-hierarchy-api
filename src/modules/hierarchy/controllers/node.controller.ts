@@ -1,7 +1,7 @@
 import { Controller, Get, Param, ParseUUIDPipe } from "@nestjs/common";
 import { ListHierarchyDto } from "../models/dtos/list.dto";
-import { FindAncestorsUseCase } from "../use-cases/find-ancestors.use-case";
-import { FindDescendantsUseCase } from "../use-cases/find-descendants.use-case";
+import { FindAncestorsUseCase } from "../use-cases/find-ancestors/find-ancestors.use-case";
+import { FindDescendantsUseCase } from "../use-cases/find-descendants/find-descendants.use-case";
 
 @Controller("nodes")
 export class NodeController {

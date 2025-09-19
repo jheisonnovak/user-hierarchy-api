@@ -1,7 +1,7 @@
 import { ConflictException, Inject, Injectable } from "@nestjs/common";
 import { EntityManager } from "typeorm";
-import { NodeEntity } from "../models/entities/node.entity";
-import { IClosureRepository } from "../models/interfaces/closure.repository.interface";
+import { NodeEntity } from "../../models/entities/node.entity";
+import { IClosureRepository } from "../../models/interfaces/closure.repository.interface";
 
 @Injectable()
 export class CreateRelationshipUseCase {
@@ -20,7 +20,7 @@ export class CreateRelationshipUseCase {
 		child: NodeEntity,
 		entityManager?: EntityManager
 	): Promise<{ parent: NodeEntity; child: NodeEntity }> {
-		if (parent === child) throw new ConflictException("Cyclic relationship is not allowed");
+		if (parent.id === child.id) throw new ConflictException("Cyclic relationship is not allowed");
 
 		const closure = await this.closureRepository.findRelationBetweenNodes(parent.id, child.id, entityManager);
 		const existingCycle = closure && closure.ancestorId === child.id && closure.descendantId === parent.id;

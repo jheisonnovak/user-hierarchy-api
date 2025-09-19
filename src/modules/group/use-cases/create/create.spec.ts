@@ -1,11 +1,10 @@
 import { ConflictException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { LoggerModule } from "nestjs-pino";
 import { DataSource } from "typeorm";
 import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
-import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node.use-case";
-import { CreateRelationshipUseCase } from "../../../hierarchy/use-cases/create-relationship.use-case";
-import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node.use-case";
+import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node-with-self-link/create-node-with-self-link.use-case";
+import { CreateRelationshipUseCase } from "../../../hierarchy/use-cases/create-relationship/create-relationship.use-case";
+import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node/find-and-validate-node.use-case";
 import { ListGroupDto } from "../../models/dtos/list.dto";
 import { CreateGroupUseCase } from "./create.use-case";
 
@@ -42,7 +41,7 @@ describe("CreateGroup", () => {
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [LoggerModule.forRoot({ pinoHttp: { autoLogging: false } })],
+			imports: [],
 			providers: [
 				CreateGroupUseCase,
 				{ provide: "INodeRepository", useValue: {} },
@@ -66,7 +65,7 @@ describe("CreateGroup", () => {
 		expect(mockCreateNodeWithSelfLinkUseCase).toBeDefined();
 	});
 
-	describe("CreateGroupUseCase", () => {
+	describe("execute", () => {
 		it("should create a group without parent", async () => {
 			const result = await createUseCase.execute({ name: createGroupDto.name });
 

@@ -1,10 +1,9 @@
 import { ConflictException, NotFoundException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { LoggerModule } from "nestjs-pino";
 import { DataSource } from "typeorm";
 import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
-import { CreateRelationshipUseCase } from "../../../hierarchy/use-cases/create-relationship.use-case";
-import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node.use-case";
+import { CreateRelationshipUseCase } from "../../../hierarchy/use-cases/create-relationship/create-relationship.use-case";
+import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node/find-and-validate-node.use-case";
 import { CreateAssociationUserUseCase } from "./create-association.use-case";
 
 describe("CreateAssociationUser", () => {
@@ -39,7 +38,7 @@ describe("CreateAssociationUser", () => {
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [LoggerModule.forRoot({ pinoHttp: { autoLogging: false } })],
+			imports: [],
 			providers: [
 				CreateAssociationUserUseCase,
 				{ provide: "INodeRepository", useValue: {} },
@@ -62,7 +61,7 @@ describe("CreateAssociationUser", () => {
 		expect(mockCreateRelationshipUseCase).toBeDefined();
 	});
 
-	describe("CreateAssociationUserUseCase", () => {
+	describe("execute", () => {
 		it("should create an association", async () => {
 			mockFindAndValidateNodeUseCase.execute.mockResolvedValueOnce(mockGroup).mockResolvedValueOnce(mockNode);
 

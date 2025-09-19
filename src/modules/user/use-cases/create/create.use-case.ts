@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
-import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node.use-case";
-import { ValidateEmailUniquenessUseCase } from "../../../hierarchy/use-cases/validate-email-uniqueness.use-case";
+import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node-with-self-link/create-node-with-self-link.use-case";
+import { ValidateEmailUniquenessUseCase } from "../../../hierarchy/use-cases/validate-email-uniqueness/validate-email-uniqueness.use-case";
 import { CreateUserDto } from "../../models/dtos/create.dto";
 import { ListUserDto } from "../../models/dtos/list.dto";
 

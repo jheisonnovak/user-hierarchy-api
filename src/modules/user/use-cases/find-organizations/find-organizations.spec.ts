@@ -1,9 +1,8 @@
 import { NotFoundException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { LoggerModule } from "nestjs-pino";
 import { ListHierarchyDto } from "../../../hierarchy/models/dtos/list.dto";
 import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
-import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node.use-case";
+import { FindAndValidateNodeUseCase } from "../../../hierarchy/use-cases/find-and-validate-node/find-and-validate-node.use-case";
 import { FindOrganizationsUseCase } from "./find-organizations.use-case";
 
 describe("FindOrganizationsUser", () => {
@@ -24,7 +23,7 @@ describe("FindOrganizationsUser", () => {
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [LoggerModule.forRoot({ pinoHttp: { autoLogging: false } })],
+			imports: [],
 			providers: [
 				FindOrganizationsUseCase,
 				{ provide: "INodeRepository", useValue: mockRepository },
@@ -44,7 +43,7 @@ describe("FindOrganizationsUser", () => {
 		expect(mockFindAndValidateNodeUseCase).toBeDefined();
 	});
 
-	describe("FindOrganizationsUserUseCase", () => {
+	describe("execute", () => {
 		it("should return a list of organizations", async () => {
 			const result = await createAssociationUseCase.execute("user-123");
 

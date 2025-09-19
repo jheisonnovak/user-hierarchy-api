@@ -1,9 +1,8 @@
 import { ConflictException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { LoggerModule } from "nestjs-pino";
 import { NodeType } from "../../../hierarchy/models/enums/node-type.enum";
-import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node.use-case";
-import { ValidateEmailUniquenessUseCase } from "../../../hierarchy/use-cases/validate-email-uniqueness.use-case";
+import { CreateNodeWithSelfLinkUseCase } from "../../../hierarchy/use-cases/create-node-with-self-link/create-node-with-self-link.use-case";
+import { ValidateEmailUniquenessUseCase } from "../../../hierarchy/use-cases/validate-email-uniqueness/validate-email-uniqueness.use-case";
 import { ListUserDto } from "../../models/dtos/list.dto";
 import { CreateUserUseCase } from "./create.use-case";
 
@@ -28,7 +27,7 @@ describe("CreateUser", () => {
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [LoggerModule.forRoot({ pinoHttp: { autoLogging: false } })],
+			imports: [],
 			providers: [
 				CreateUserUseCase,
 				{ provide: "INodeRepository", useValue: {} },
@@ -50,7 +49,7 @@ describe("CreateUser", () => {
 		expect(mockCreateNodeWithSelfLinkUseCase).toBeDefined();
 	});
 
-	describe("CreateUserUseCase", () => {
+	describe("execute", () => {
 		it("should create an user", async () => {
 			const result = await createUseCase.execute(createUserDto);
 

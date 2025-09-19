@@ -1,5 +1,5 @@
 import { ConflictException, Inject, Injectable } from "@nestjs/common";
-import { INodeRepository } from "../models/interfaces/node.repository.interface";
+import { INodeRepository } from "../../models/interfaces/node.repository.interface";
 
 @Injectable()
 export class ValidateEmailUniquenessUseCase {

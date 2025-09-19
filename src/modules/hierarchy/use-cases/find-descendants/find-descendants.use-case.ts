@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ListHierarchyDto } from "../models/dtos/list.dto";
-import { INodeRepository } from "../models/interfaces/node.repository.interface";
-import { FindAndValidateNodeUseCase } from "./find-and-validate-node.use-case";
+import { ListHierarchyDto } from "../../models/dtos/list.dto";
+import { INodeRepository } from "../../models/interfaces/node.repository.interface";
+import { FindAndValidateNodeUseCase } from "../find-and-validate-node/find-and-validate-node.use-case";
 
 @Injectable()
 export class FindDescendantsUseCase {
