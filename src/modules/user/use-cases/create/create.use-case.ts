@@ -15,7 +15,6 @@ export class CreateUserUseCase {
 	async execute(dto: CreateUserDto): Promise<ListUserDto> {
 		await this.validateEmailUniquenessUseCase.execute(dto.email);
 		const user = await this.createNodeWithSelfLinkUseCase.execute(NodeType.USER, dto.name, dto.email);
-
 		return new ListUserDto(user.id, user.type, user.name, user.email, user.createdAt);
 	}
 }

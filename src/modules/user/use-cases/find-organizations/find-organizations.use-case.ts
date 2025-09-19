@@ -13,8 +13,8 @@ export class FindOrganizationsUseCase {
 	) {}
 
 	async execute(userId: string): Promise<ListHierarchyDto[]> {
-		const user = await this.findAndValidateNodeUseCase.execute(userId, NodeType.USER);
-		const groups = await this.nodeRepository.findAncestorsByIdAndType(user.id, NodeType.GROUP);
+		await this.findAndValidateNodeUseCase.execute(userId, NodeType.USER);
+		const groups = await this.nodeRepository.findAncestorsByIdAndType(userId, NodeType.GROUP);
 		return groups.map(group => new ListHierarchyDto(group.id, group.name, group.depth));
 	}
 }

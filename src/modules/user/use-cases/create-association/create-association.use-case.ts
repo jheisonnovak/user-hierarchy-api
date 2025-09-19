@@ -16,8 +16,8 @@ export class CreateAssociationUserUseCase {
 	async execute(id: string, dto: CreateAssociationDto): Promise<void> {
 		await this.dataSource.transaction(async manager => {
 			const group = await this.findAndValidateNodeUseCase.execute(dto.groupId, NodeType.GROUP, manager);
-			const user = await this.findAndValidateNodeUseCase.execute(id, undefined, manager);
-			await this.createRelationshipUseCase.execute(group, user, manager);
+			const node = await this.findAndValidateNodeUseCase.execute(id, undefined, manager);
+			await this.createRelationshipUseCase.execute(group, node, manager);
 		});
 	}
 }

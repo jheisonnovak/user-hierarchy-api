@@ -26,16 +26,12 @@ describe("CreateUser", () => {
 		execute: jest.fn().mockResolvedValue(mockUserNode),
 	};
 
-	const mockRepository = {
-		save: jest.fn().mockResolvedValue(mockUserNode),
-	};
-
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			imports: [LoggerModule.forRoot({ pinoHttp: { autoLogging: false } })],
 			providers: [
 				CreateUserUseCase,
-				{ provide: "INodeRepository", useValue: mockRepository },
+				{ provide: "INodeRepository", useValue: {} },
 				{ provide: ValidateEmailUniquenessUseCase, useValue: mockValidateEmailUniquenessUseCase },
 				{ provide: CreateNodeWithSelfLinkUseCase, useValue: mockCreateNodeWithSelfLinkUseCase },
 			],
