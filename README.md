@@ -15,6 +15,13 @@ Uma API RESTful construída com NestJS para gerenciamento de hierarquias de usu�
 
 ## 🚀 Como Rodar
 
+#### Clone o repositório
+
+```bash
+git clone https://github.com/jheisonnovak/user-hierarchy-api.git
+cd user-hierarchy-api
+```
+
 ### Opção 1: Desenvolvimento com DevContainer (Recomendado)
 
 #### 1. Pré-requisitos
@@ -51,20 +58,13 @@ yarn run start:dev
 
 Certifique-se de possuir PostgreSQL e Jaeger rodando na máquina local
 
-#### 1. Clone o repositório
-
-```bash
-git clone https://github.com/jheisonnovak/user-hierarchy-api.git
-cd user-hierarchy-api
-```
-
-#### 2. Instale as dependências
+#### 1. Instale as dependências
 
 ```bash
 yarn install
 ```
 
-#### 3. Configure as variáveis de ambiente
+#### 2. Configure as variáveis de ambiente
 
 Crie um arquivo `.env` na raiz do projeto:
 
@@ -85,7 +85,7 @@ LOG_LEVEL=info
 JAEGER_ENDPOINT=http://localhost:4318/v1/traces
 ```
 
-#### 4. Configure o banco de dados PostgreSQL
+#### 3. Configure o banco de dados PostgreSQL
 
 Certifique-se de que o PostgreSQL está rodando e crie o banco de dados:
 
@@ -93,13 +93,13 @@ Certifique-se de que o PostgreSQL está rodando e crie o banco de dados:
 CREATE DATABASE user_hierarchy;
 ```
 
-#### 5. Execute as migrations
+#### 4. Execute as migrations
 
 ```bash
 yarn run migration:run
 ```
 
-#### 6. Inicie a aplicação
+#### 5. Inicie a aplicação
 
 ```bash
 yarn run start:dev
