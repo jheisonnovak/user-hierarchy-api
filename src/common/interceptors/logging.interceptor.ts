@@ -1,6 +1,6 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { PinoLogger } from "nestjs-pino";
-import { catchError, Observable } from "rxjs";
+import { catchError, Observable, tap, throwError } from "rxjs";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -8,15 +8,17 @@ export class LoggingInterceptor implements NestInterceptor {
 
 	intercept(ctx: ExecutionContext, next: CallHandler): Observable<unknown> {
 		const req = ctx.switchToHttp().getRequest<Request>();
+		const start = Date.now();
 
 		this.logger.info({ data: req.body }, `START ${req.method} ${req.url}`);
 
 		return next.handle().pipe(
-			catchError((err: unknown) => {
+			tap(() => this.logger.info(`END   ${req.method} ${req.url} ${Date.now() - start}ms`)),
+			catchError(err => {
 				const message = err instanceof Error ? err.message : String(err);
 				const stack = err instanceof Error ? err.stack : undefined;
 				this.logger.error(`ERROR ${req.method} ${req.url}: ${message}`, stack);
-				throw err;
+				return throwError(() => err);
 			})
 		);
 	}

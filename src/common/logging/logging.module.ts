@@ -8,7 +8,7 @@ import { LoggerModule } from "nestjs-pino";
 		ConfigModule.forRoot(),
 		LoggerModule.forRoot({
 			pinoHttp: {
-				autoLogging: true,
+				autoLogging: false,
 				serializers: {
 					req(req) {
 						return { id: req.id, method: req.method, url: req.url };

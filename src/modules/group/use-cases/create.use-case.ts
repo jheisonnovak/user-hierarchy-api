@@ -20,7 +20,7 @@ export class CreateGroupUseCase {
 		const group = await this.dataSource.transaction(async entityManager => {
 			const group = await this.createNodeWithSelfLinkUseCase.execute(NodeType.GROUP, dto.name, undefined, entityManager);
 			if (dto.parentId) {
-				const parentGroup = await this.findAndValidateNodeUseCase.execute(dto.parentId, NodeType.GROUP);
+				const parentGroup = await this.findAndValidateNodeUseCase.execute(dto.parentId, NodeType.GROUP, entityManager);
 				await this.createRelationshipUseCase.execute(parentGroup, group, entityManager);
 			}
 			return group;

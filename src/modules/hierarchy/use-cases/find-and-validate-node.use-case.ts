@@ -1,4 +1,5 @@
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { EntityManager } from "typeorm";
 import { NodeEntity } from "../models/entities/node.entity";
 import { NodeType } from "../models/enums/node-type.enum";
 import { INodeRepository } from "../models/interfaces/node.repository.interface";
@@ -10,8 +11,10 @@ export class FindAndValidateNodeUseCase {
 		private readonly nodeRepository: INodeRepository
 	) {}
 
-	async execute(id: string, type?: NodeType): Promise<NodeEntity> {
-		const node = type ? await this.nodeRepository.findByIdAndType(id, type) : await this.nodeRepository.findById(id);
+	async execute(id: string, type?: NodeType, entityManager?: EntityManager): Promise<NodeEntity> {
+		const node = type
+			? await this.nodeRepository.findByIdAndType(id, type, entityManager)
+			: await this.nodeRepository.findById(id, entityManager);
 		if (!node) throw new NotFoundException(`The ${type ?? "node"} was not found`);
 		return node;
 	}
