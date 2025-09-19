@@ -51,7 +51,7 @@ export class ClosureTypeOrmRepository implements IClosureRepository {
         CROSS JOIN closure ctcj
         WHERE ct.descendant_id = $1 
           AND ctcj.ancestor_id = $2
-		ON CONFLICT (ancestor_id, descendant_id) DO NOTHING`, // TODO Verificar se isso é necessário/ou se precisa corrigir em outro local
+		ON CONFLICT (ancestor_id, descendant_id) DO NOTHING`,
 			[parentId, childId]
 		);
 	}
