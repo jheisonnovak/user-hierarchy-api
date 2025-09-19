@@ -1,6 +1,5 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
 import { randomUUID } from "crypto";
 import { PinoLogger } from "nestjs-pino";
 import * as request from "supertest";
@@ -35,15 +34,6 @@ describe("App (e2e)", () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({
 			imports: [AppModule],
 		})
-			.overrideModule(TypeOrmModule)
-			.useModule(
-				TypeOrmModule.forRoot({
-					type: "sqlite",
-					database: ":memory:",
-					synchronize: true,
-					dropSchema: true,
-				})
-			)
 			.overrideProvider(PinoLogger)
 			.useValue(mockPino)
 			.compile();
