@@ -45,7 +45,7 @@ describe("FindOrganizationsUser", () => {
 	});
 
 	describe("FindOrganizationsUserUseCase", () => {
-		it("should create an association", async () => {
+		it("should return a list of organizations", async () => {
 			const result = await createAssociationUseCase.execute("user-123");
 
 			expect(result).toBeInstanceOf(Array<ListHierarchyDto>);

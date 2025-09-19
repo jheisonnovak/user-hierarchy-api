@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { HierarchyModule } from "../hierarchy/hierarchy.module";
 import { GroupController } from "./controllers/group.module";
-import { CreateGroupUseCase } from "./use-cases/create.use-case";
+import { CreateGroupUseCase } from "./use-cases/create/create.use-case";
 
 @Module({
 	imports: [HierarchyModule],

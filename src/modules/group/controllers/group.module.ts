@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CreateGroupDto } from "../models/dtos/create.dto";
 import { ListGroupDto } from "../models/dtos/list.dto";
-import { CreateGroupUseCase } from "../use-cases/create.use-case";
+import { CreateGroupUseCase } from "../use-cases/create/create.use-case";
 
 @Controller("groups")
 export class GroupController {
